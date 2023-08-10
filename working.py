@@ -40,7 +40,7 @@ def convert():
             uploaded_file.save(str(csv_path))
 
         if os.path.exists(csv_path):
-            directory_path = './excel_files'
+            directory_path = './files'
             csv_file_name = pathlib.Path(csv_path).name
             file = csv_file_name.split('.csv')[0]
             exc_file_name = f"""{file}.xlsx""" 
