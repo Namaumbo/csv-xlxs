@@ -1,5 +1,5 @@
 import pathlib
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 import openpyxl
 import pandas as pd
 import os
@@ -61,10 +61,17 @@ def convert():
 
                     if os.path.exists(full_path):
                         set_wb_password_with_win(str(full), password)
+
+                    return send_file(
+                            full,
+                            download_name=f"""{exc_file_name}""",
+                            as_attachment=True,
+                            mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                    )
                 
-                    response['message'] = 'Done Processing'
-                    response['status'] = 'success'
-                    code = 200  
+                    # response['message'] = 'Done Processing'
+                    # response['status'] = 'success'
+                    # code = 200  
                 else:
                     response['message']='file already exists'
                     response['status'] = 'fail'
